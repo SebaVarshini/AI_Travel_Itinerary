@@ -120,3 +120,14 @@ GitHub: https://github.com/SebaVarshini
 ---
 
 *Explore Smarter, Travel Better!* 🌍
+
+## 📸 Project Screenshots
+
+### 1. Home Page
+![Home Page](screenshots/home.png)
+
+### 2. Recommendations
+![Recommendations](screenshots/recommendations.png)
+
+### 3. Generated Itinerary
+![Itinerary](screenshots/itinerary.png)
