@@ -1,0 +1,554 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Your Travel Itinerary</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #070b14;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 35px 15px;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: rgba(40,123,255,0.12);
+            border: 1px solid #244879;
+            color: #64a1ff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        h1 span {
+            color: #438bff;
+        }
+
+        .header p {
+            color: #91a0b8;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* SUMMARY */
+
+        .summary {
+            background: #101827;
+            border: 1px solid #263753;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 35px;
+        }
+
+        .section-heading {
+            font-size: 19px;
+            margin-bottom: 22px;
+        }
+
+        .section-heading span {
+            color: #438bff;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .summary-card {
+            background: #0a1220;
+            border: 1px solid #293a55;
+            padding: 19px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .summary-card:hover {
+            border-color: #438bff;
+            transform: translateY(-3px);
+        }
+
+        .summary-card .icon {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .summary-card p {
+            color: #8292aa;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .summary-card h3 {
+            font-size: 19px;
+            color: #ffffff;
+            overflow-wrap: anywhere;
+        }
+
+        /* DAY SECTION */
+
+        .day {
+            margin-top: 35px;
+        }
+
+        .day-title {
+            background: linear-gradient(100deg, #1254bd, #287bff);
+            padding: 17px 22px;
+            border-radius: 12px;
+            font-size: 20px;
+            box-shadow: 0 5px 20px rgba(40,123,255,0.15);
+        }
+
+        .day-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: #101827;
+            border: 1px solid #263753;
+            padding: 17px;
+            margin-top: 12px;
+            border-radius: 12px;
+            color: #c6d3e6;
+            font-size: 13px;
+        }
+
+        .day-info span {
+            color: #62a0ff;
+            font-weight: 700;
+        }
+
+        /* PLACE CARDS */
+
+        .place {
+            background: #101827;
+            border: 1px solid #263753;
+            margin-top: 16px;
+            padding: 24px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .place:hover {
+            border-color: #398bff;
+            box-shadow: 0 5px 25px rgba(40,123,255,0.08);
+            transform: translateY(-2px);
+        }
+
+        .place h3 {
+            color: #69a6ff;
+            font-size: 19px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .place-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 13px;
+        }
+
+        .info-item {
+            background: #0a1220;
+            border: 1px solid #23334b;
+            padding: 13px;
+            border-radius: 9px;
+            font-size: 12px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        .info-item strong {
+            display: block;
+            color: #8298b8;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            color: #ffffff;
+            font-size: 13px;
+        }
+
+        .significance {
+            grid-column: 1 / -1;
+        }
+
+        /* TOTAL */
+
+        .total {
+            background: linear-gradient(120deg, #10264b, #101827);
+            border: 1px solid #287bff;
+            padding: 28px;
+            margin-top: 35px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .total h2 {
+            font-size: 20px;
+            margin-bottom: 18px;
+        }
+
+        .total h2 span {
+            color: #69a6ff;
+        }
+
+        .total-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 45px;
+        }
+
+        .total-item p {
+            color: #91a0b8;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .total-item h3 {
+            color: #ffffff;
+            font-size: 25px;
+        }
+
+        /* EMPTY STATE */
+
+        .no-results {
+            background: #101827;
+            border: 1px solid #263753;
+            padding: 45px 20px;
+            text-align: center;
+            border-radius: 16px;
+            margin-top: 30px;
+        }
+
+        .no-results h2 {
+            color: #69a6ff;
+            margin-bottom: 15px;
+        }
+
+        .no-results p {
+            color: #91a0b8;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        /* BUTTON */
+
+        .back {
+            display: block;
+            width: fit-content;
+            margin: 35px auto;
+            padding: 14px 27px;
+            text-align: center;
+            background: linear-gradient(90deg, #1765e8, #398bff);
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(40,123,255,0.3);
+        }
+
+        .footer {
+            text-align: center;
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 40px;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 650px) {
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .place-info {
+                grid-template-columns: 1fr;
+            }
+
+            .significance {
+                grid-column: auto;
+            }
+
+            .total-grid {
+                gap: 25px;
+            }
+
+        }
+
+        @media(max-width: 400px) {
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="tag">YOUR PERSONALIZED TRAVEL PLAN</div>
+
+        <h1>✈️ Your AI Travel <span>Itinerary</span></h1>
+
+        <p>
+            Your journey is ready! Explore your selected destinations
+            and enjoy a smarter travel experience.
+        </p>
+
+    </div>
+
+
+    <!-- TRIP SUMMARY -->
+
+    <div class="summary">
+
+        <h2 class="section-heading">
+            <span>✦</span> Trip Overview
+        </h2>
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+                <div class="icon">📍</div>
+                <p>Destination State</p>
+                <h3>{{ state }}</h3>
+            </div>
+
+            <div class="summary-card">
+                <div class="icon">💰</div>
+                <p>Total Budget</p>
+                <h3>₹{{ budget }}</h3>
+            </div>
+
+            <div class="summary-card">
+                <div class="icon">⏱️</div>
+                <p>Available Hours</p>
+                <h3>{{ hours }} hrs/day</h3>
+            </div>
+
+            <div class="summary-card">
+                <div class="icon">📅</div>
+                <p>Trip Duration</p>
+                <h3>{{ days }} Days</h3>
+            </div>
+
+            <div class="summary-card">
+                <div class="icon">🏛️</div>
+                <p>Selected Places</p>
+                <h3>{{ total_places }}</h3>
+            </div>
+
+            <div class="summary-card">
+                <div class="icon">🧭</div>
+                <p>Travel Experience</p>
+                <h3>AI Planned</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ITINERARY -->
+
+    {% if itinerary %}
+
+        <h2 class="section-heading">
+            <span>✦</span> Your Day-wise Itinerary
+        </h2>
+
+        {% for day in itinerary %}
+
+        <div class="day">
+
+            <h2 class="day-title">
+                🌅 Day {{ day.day }}
+            </h2>
+
+            <div class="day-info">
+
+                <div>
+                    ⏱️ Visit Duration:
+                    <span>{{ day.day_hours }} Hours</span>
+                </div>
+
+                <div>
+                    💰 Entrance Fee:
+                    <span>₹{{ day.day_fee }}</span>
+                </div>
+
+            </div>
+
+
+            {% for place in day.places %}
+
+            <div class="place">
+
+                <h3>📍 {{ place["Name"] }}</h3>
+
+                <div class="place-info">
+
+                    <div class="info-item">
+                        <strong>🏙️ CITY</strong>
+                        <p>{{ place["City"] }}</p>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>🏛️ CATEGORY</strong>
+                        <p>{{ place["Type"] }}</p>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>⭐ GOOGLE RATING</strong>
+                        <p>{{ place["Google review rating"] }}</p>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>💰 ENTRANCE FEE</strong>
+                        <p>₹{{ place["Entrance Fee in INR"] }}</p>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>⏱️ VISIT DURATION</strong>
+                        <p>{{ place["time needed to visit in hrs"] }} Hours</p>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>🕐 BEST TIME TO VISIT</strong>
+                        <p>{{ place["Best Time to visit"] }}</p>
+                    </div>
+
+                    <div class="info-item significance">
+                        <strong>📖 ABOUT THIS PLACE</strong>
+                        <p>{{ place["Significance"] }}</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endfor %}
+
+
+        <!-- TOTAL SUMMARY -->
+
+        <div class="total">
+
+            <h2>✦ Your Travel <span>Summary</span></h2>
+
+            <div class="total-grid">
+
+                <div class="total-item">
+                    <p>Estimated Entrance Fee</p>
+                    <h3>₹{{ total_fee }}</h3>
+                </div>
+
+                <div class="total-item">
+                    <p>Total Tourist Places</p>
+                    <h3>{{ total_places }}</h3>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    {% else %}
+
+        <!-- NO RESULTS -->
+
+        <div class="no-results">
+
+            <h2>😔 No Suitable Places Found</h2>
+
+            <p>
+                We couldn't find tourist places matching your
+                current travel preferences.
+            </p>
+
+            <p>
+                Try increasing your budget or available hours
+                to discover more destinations.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- BACK BUTTON -->
+
+    <a href="/" class="back">
+        ← Plan Another Trip
+    </a>
+
+
+    <div class="footer">
+        POWERED BY AI • EXPLORE SMARTER, TRAVEL BETTER
+    </div>
+
+</div>
+
+</body>
+</html>
